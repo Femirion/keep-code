@@ -19,6 +19,7 @@
         <module>Phone/Phone-API</module>
         <module>Phone/Phone-Client</module>
         <module>Phone/Phone-Core</module>
+        <module>Second-Task</module>
     </modules>
 
     <properties>
