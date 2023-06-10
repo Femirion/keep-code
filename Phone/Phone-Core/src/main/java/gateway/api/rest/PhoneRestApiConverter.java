@@ -6,6 +6,7 @@ import domain.entity.Phone;
 import gateway.api.rest.parser.PhoneParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import service.RestApiErrorHandler;
 
 import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
@@ -24,11 +25,13 @@ public class PhoneRestApiConverter {
     private final PhoneParser<String> countryTextParser;
     private final PhoneParser<LocalDateTime> maxDateParser;
     private final PhoneParser<PhoneStatus> phoneStatusParser;
+    private final RestApiErrorHandler errorHandler;
 
     public PhoneRestApiConverter(PhoneParser<String> numberParser, PhoneParser<Long> countryIdParser,
                                  PhoneParser<LocalDateTime> updatedAtParser, PhoneParser<String> dataHumansParser,
                                  PhoneParser<String> fullNumberParser, PhoneParser<String> countryTextParser,
-                                 PhoneParser<LocalDateTime> maxDateParser, PhoneParser<PhoneStatus> phoneStatusParser) {
+                                 PhoneParser<LocalDateTime> maxDateParser, PhoneParser<PhoneStatus> phoneStatusParser,
+                                 RestApiErrorHandler errorHandler) {
         this.numberParser = numberParser;
         this.countryIdParser = countryIdParser;
         this.updatedAtParser = updatedAtParser;
@@ -37,6 +40,7 @@ public class PhoneRestApiConverter {
         this.countryTextParser = countryTextParser;
         this.maxDateParser = maxDateParser;
         this.phoneStatusParser = phoneStatusParser;
+        this.errorHandler = errorHandler;
     }
 
     public CompletableFuture<List<Phone>> convert(CompletableFuture<HttpResponse<String>> response) {
@@ -48,6 +52,7 @@ public class PhoneRestApiConverter {
     }
 
     private CompletableFuture<List<Phone>> convert(String input) {
+        errorHandler.handle(input);
         CompletableFuture<List<String>> numbers = CompletableFuture.supplyAsync(() -> numberParser.parse(input));
         CompletableFuture<List<Long>> countryIds = CompletableFuture.supplyAsync(() -> countryIdParser.parse(input));
         CompletableFuture<List<LocalDateTime>> updatedAts = CompletableFuture.supplyAsync(() -> updatedAtParser.parse(input));

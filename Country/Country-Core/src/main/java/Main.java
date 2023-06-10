@@ -1,5 +1,7 @@
 import gateway.api.rest.CountryRestApiConverter;
 import gateway.api.CountryApiGateway;
+import gateway.api.rest.parser.CountryRestApiErrorHandler;
+import service.RestApiErrorHandler;
 import gateway.api.rest.CountryRestGateway;
 import gateway.api.rest.parser.CountryIdParser;
 import gateway.api.rest.parser.CountryNameParser;
@@ -13,7 +15,8 @@ public class Main {
     public static void main(String[] args) throws Exception {
         CountryParser<String> countryNameParser = new CountryNameParser();
         CountryParser<Long> countryIdParser = new CountryIdParser();
-        CountryApiGateway gate = new CountryRestGateway(new CountryRestApiConverter(countryNameParser, countryIdParser));
+        RestApiErrorHandler errorHandler = new CountryRestApiErrorHandler();
+        CountryApiGateway gate = new CountryRestGateway(new CountryRestApiConverter(countryNameParser, countryIdParser, errorHandler));
 
         gate.getCountries().get()
                 .forEach(c -> log.debug(c.toString()));

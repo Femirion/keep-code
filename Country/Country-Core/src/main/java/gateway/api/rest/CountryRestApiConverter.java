@@ -5,6 +5,7 @@ import domain.entity.Country;
 import gateway.api.rest.parser.CountryParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import service.RestApiErrorHandler;
 
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
@@ -16,10 +17,13 @@ public class CountryRestApiConverter {
     private static final Logger log = LoggerFactory.getLogger(CountryRestApiConverter.class);
     private final CountryParser<String> countryNameParser;
     private final CountryParser<Long> countryIdParser;
+    private final RestApiErrorHandler errorHandler;
 
-    public CountryRestApiConverter(CountryParser<String> countryNameParser, CountryParser<Long> countryIdParser) {
+    public CountryRestApiConverter(CountryParser<String> countryNameParser, CountryParser<Long> countryIdParser,
+                                   RestApiErrorHandler errorHandler) {
         this.countryNameParser = countryNameParser;
         this.countryIdParser = countryIdParser;
+        this.errorHandler = errorHandler;
     }
 
     public CompletableFuture<List<Country>> convert(CompletableFuture<HttpResponse<String>> response) {
@@ -31,6 +35,7 @@ public class CountryRestApiConverter {
     }
 
     private CompletableFuture<List<Country>> convert(String input) {
+        errorHandler.handle(input);
         CompletableFuture<List<String>> countryNames = CompletableFuture.supplyAsync(() -> countryNameParser.parse(input));
         CompletableFuture<List<Long>> countryIds = CompletableFuture.supplyAsync(() -> countryIdParser.parse(input));
         return countryNames.thenCombineAsync(countryIds, this::buildCountryList);

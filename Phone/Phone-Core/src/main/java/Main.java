@@ -1,10 +1,12 @@
 import dto.dictionary.PhoneStatus;
 import gateway.api.PhoneApiGateway;
 import gateway.api.rest.PhoneRestApiConverter;
+import gateway.api.rest.PhoneRestApiErrorHandler;
 import gateway.api.rest.PhoneRestGateway;
 import gateway.api.rest.parser.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import service.RestApiErrorHandler;
 
 import java.time.LocalDateTime;
 
@@ -21,6 +23,7 @@ public class Main {
         PhoneParser<String> countryNameParser = new CountryTextParser();
         PhoneParser<LocalDateTime> maxDateParser = new MaxDateParser();
         PhoneParser<PhoneStatus> phoneStatusParser = new StatusParser();
+        RestApiErrorHandler errorHandler = new PhoneRestApiErrorHandler();
 
         PhoneApiGateway gate = new PhoneRestGateway(
                 new PhoneRestApiConverter(
@@ -31,7 +34,8 @@ public class Main {
                         fullNumberParser,
                         countryNameParser,
                         maxDateParser,
-                        phoneStatusParser
+                        phoneStatusParser,
+                        errorHandler
                 ));
         // 7 - Russia
         gate.getPhonesByCountry(7).get()

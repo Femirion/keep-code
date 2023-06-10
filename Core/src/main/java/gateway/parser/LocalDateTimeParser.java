@@ -1,7 +1,6 @@
 package gateway.parser;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import exception.ParseException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +14,6 @@ import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_TIME;
 
 public class LocalDateTimeParser  implements Parser<LocalDateTime> {
-    private static final Logger log = LoggerFactory.getLogger(LocalDateTimeParser.class);
     public static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
             .append(ISO_LOCAL_DATE)
@@ -46,6 +44,6 @@ public class LocalDateTimeParser  implements Parser<LocalDateTime> {
 
     @Override
     public void handleError(String input, Exception ex) {
-        log.error("can not parse LocalDateTime from input={}", input, ex);
+        throw new ParseException("can not parse LocalDateTime from input=" + input, ex);
     }
 }

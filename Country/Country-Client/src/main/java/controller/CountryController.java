@@ -7,6 +7,8 @@ import domain.sevice.CountryServiceImpl;
 import dto.CountryDto;
 import gateway.api.CountryApiGateway;
 import gateway.api.rest.CountryRestApiConverter;
+import gateway.api.rest.parser.CountryRestApiErrorHandler;
+import service.RestApiErrorHandler;
 import gateway.api.rest.CountryRestGateway;
 import gateway.api.rest.parser.CountryIdParser;
 import gateway.api.rest.parser.CountryNameParser;
@@ -28,7 +30,8 @@ public class CountryController {
     public CountryController() {
         CountryParser<String> countryNameParser = new CountryNameParser();
         CountryParser<Long> countryIdParser = new CountryIdParser();
-        CountryApiGateway gateway = new CountryRestGateway(new CountryRestApiConverter(countryNameParser, countryIdParser));
+        RestApiErrorHandler errorHandler = new CountryRestApiErrorHandler();
+        CountryApiGateway gateway = new CountryRestGateway(new CountryRestApiConverter(countryNameParser, countryIdParser, errorHandler));
         this.countryLoader = new CountryLoaderImpl(gateway);
         this.countryService = new CountryServiceImpl(new CountryInMemoryRepository());
         this.countryConverter = new CountryDtoConverter();

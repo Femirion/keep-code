@@ -9,11 +9,13 @@ import dto.PhoneDto;
 import dto.dictionary.PhoneStatus;
 import gateway.api.PhoneApiGateway;
 import gateway.api.rest.PhoneRestApiConverter;
+import gateway.api.rest.PhoneRestApiErrorHandler;
 import gateway.api.rest.PhoneRestGateway;
 import gateway.api.rest.parser.*;
 import gateway.data.memory.PhoneInMemoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import service.RestApiErrorHandler;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,6 +37,7 @@ public class PhoneController {
         PhoneParser<String> countryNameParser = new CountryTextParser();
         PhoneParser<LocalDateTime> maxDateParser = new MaxDateParser();
         PhoneParser<PhoneStatus> phoneStatusParser = new StatusParser();
+        RestApiErrorHandler errorHandler = new PhoneRestApiErrorHandler();
         PhoneApiGateway gateway = new PhoneRestGateway(
                 new PhoneRestApiConverter(
                         numberParser,
@@ -44,7 +47,8 @@ public class PhoneController {
                         fullNumberParser,
                         countryNameParser,
                         maxDateParser,
-                        phoneStatusParser
+                        phoneStatusParser,
+                        errorHandler
                 ));
         this.phoneLoader = new PhoneLoaderImpl(gateway);
 
