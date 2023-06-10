@@ -5,7 +5,7 @@
         <groupId>org.keep-code</groupId>
         <artifactId>KeepCodeTestTask</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../../../pom.xml</relativePath>
     </parent>
     <artifactId>Country-Client</artifactId>
     <name>Archetype - Country-Client</name>

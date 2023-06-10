@@ -9,17 +9,8 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>Country</module>
-        <module>Core</module>
-        <module>Phone</module>
-        <module>Manager</module>
-        <module>Country/Country-Core</module>
-        <module>Country/Country-API</module>
-        <module>Country/Country-Client</module>
-        <module>Phone/Phone-API</module>
-        <module>Phone/Phone-Client</module>
-        <module>Phone/Phone-Core</module>
         <module>Second-Task</module>
+        <module>First-Task</module>
     </modules>
 
     <properties>

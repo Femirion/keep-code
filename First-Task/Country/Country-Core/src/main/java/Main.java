@@ -19,6 +19,6 @@ public class Main {
         CountryApiGateway gate = new CountryRestGateway(new CountryRestApiConverter(countryNameParser, countryIdParser, errorHandler));
 
         gate.getCountries().get()
-                .forEach(c -> log.debug(c.toString()));
+                .forEach(c -> log.info(c.toString()));
     }
 }
