@@ -10,27 +10,12 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>Country-Core</artifactId>
+    <artifactId>Phone-API</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.keep-code</groupId>
-            <artifactId>Core</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.keep-code</groupId>
-            <artifactId>Country-API</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
 
 </project>

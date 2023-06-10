@@ -1,9 +1,9 @@
 package service;
 
 import dto.CountryDto;
-import entity.PhoneDto;
+import dto.PhoneDto;
 import controller.CountryController;
-import keepcode.presenter.PhoneController;
+import controller.PhoneController;
 
 import java.util.ArrayList;
 import java.util.List;

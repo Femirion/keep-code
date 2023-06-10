@@ -12,11 +12,9 @@
     <name>Phone</name>
     <version>1.0.0-SNAPSHOT</version>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.keep-code</groupId>
-            <artifactId>Core</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>Phone-Core</module>
+        <module>Phone-API</module>
+        <module>Phone-Client</module>
+    </modules>
 </project>

@@ -1,5 +1,5 @@
 import dto.CountryDto;
-import entity.PhoneDto;
+import dto.PhoneDto;
 import exception.CommonIOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
