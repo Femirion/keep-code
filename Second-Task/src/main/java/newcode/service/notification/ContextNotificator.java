@@ -8,7 +8,6 @@ public class ContextNotificator {
 
     public void sendCommandToContext(ChannelHandlerContext channelHandlerContext, InetSocketAddress inetSocketAddress,
                                      WrappedCommand wrappedCommand) {
-        (channelHandlerContext, inetSocketAddress, wrappedCommand.getCommandText());
     }
 
 }
