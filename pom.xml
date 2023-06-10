@@ -13,6 +13,9 @@
         <module>Core</module>
         <module>Phone</module>
         <module>Manager</module>
+        <module>Country/Country-Core</module>
+        <module>Country/Country-API</module>
+        <module>Country/Country-Client</module>
     </modules>
 
     <properties>

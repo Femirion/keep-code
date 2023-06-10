@@ -5,27 +5,24 @@
         <groupId>org.keep-code</groupId>
         <artifactId>KeepCodeTestTask</artifactId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <artifactId>Country</artifactId>
-    <name>Country</name>
-    <version>1.0.0-SNAPSHOT</version>
-
-    <modules>
-        <module>Country-Core</module>
-        <module>Country-API</module>
-        <module>Country-Client</module>
-    </modules>
+    <artifactId>Country-Client</artifactId>
+    <name>Archetype - Country-Client</name>
+    <url>http://maven.apache.org</url>
 
     <dependencies>
         <dependency>
             <groupId>org.keep-code</groupId>
-            <artifactId>Core</artifactId>
+            <artifactId>Country-API</artifactId>
             <version>1.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.keep-code</groupId>
-            <artifactId>Country-API</artifactId>
+            <artifactId>Country-Core</artifactId>
             <version>1.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
