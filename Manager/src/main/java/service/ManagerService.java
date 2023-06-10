@@ -1,14 +1,17 @@
 package service;
 
-import dto.CountryDto;
-import dto.PhoneDto;
 import controller.CountryController;
 import controller.PhoneController;
+import dto.CountryDto;
+import dto.PhoneDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ManagerService {
+    private static final Logger log = LoggerFactory.getLogger(ManagerService.class);
     private final CountryController countryController;
     private final PhoneController phoneController;
 
@@ -23,21 +26,27 @@ public class ManagerService {
     }
 
     public List<CountryDto> getAllCountries() {
-        return countryController.load();
+        log.debug("Loading countries");
+        List<CountryDto> result = countryController.load();
+        log.debug("Loaded countries, total countries: {}", result.size());
+        return result;
     }
 
     public List<PhoneDto> getAllPhonesByCountry(long countryId) {
-        return phoneController.load(countryId);
+        log.debug("Loading phones for country {}", countryId);
+        List<PhoneDto> result = phoneController.load(countryId);
+        log.debug("Loaded phones for country {}, total phones: {}", countryId, result.size());
+        return result;
     }
 
     public List<PhoneDto> getAllPhones(List<CountryDto> countries) {
         List<PhoneDto> result = new ArrayList<>();
         for(CountryDto country : countries) {
             result.addAll(phoneController.load(country.id()));
-            System.out.println("Loaded phones for country " + country.name() + ", total phones: " + result.size());
+            log.info("Loaded phones for country {}, total count of phones: {}", country.name(), result.size());
         }
         return result;
-        // todo can be improved with parallelStream
+        // todo can be improved with parallelStream or CompletableFuture
 //        return countries.parallelStream()
 //                .map(country -> phoneController.load(country.id()))
 //                .reduce((r1, r2) -> {
